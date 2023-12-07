@@ -1,14 +1,12 @@
 package com.maureva.domain.entity;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.maureva.domain.dto.AirportCode;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
@@ -28,13 +26,18 @@ public class Flight implements Serializable {
     private UUID uuid = UUID.randomUUID();
 
     @Column(name = "origin", nullable = false)
-    private String origin;
+    @Enumerated(EnumType.STRING)
+    private AirportCode origin;
 
     @Column(name = "destination", nullable = false)
-    private String destination;
+    @Enumerated(EnumType.STRING)
+    private AirportCode destination;
 
     @Column(name = "departure_time", nullable = false)
-    private String departureTime;
+    private OffsetDateTime departureTime;
+
+    @Column(name = "arrival_time", nullable = false)
+    private OffsetDateTime arrivalTime;
 
     @Column(name = "flight_number") // Customize length, name, etc., as needed
     private Integer flightNumber;
@@ -44,8 +47,5 @@ public class Flight implements Serializable {
 
     @Column(name = "carrier")
     private String carrier;
-
-    @Column(name = "arrival_time", nullable = false)
-    private String arrivalTime;
 
 }

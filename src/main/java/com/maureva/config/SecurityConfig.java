@@ -1,6 +1,6 @@
 package com.maureva.config;
 
-import com.nimbusds.jose.shaded.gson.internal.LinkedTreeMap;
+/*import com.nimbusds.jose.shaded.gson.internal.LinkedTreeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.stream.Collectors;*/
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity*/
 public class SecurityConfig {
 
-    @Bean
+/*    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> auth.requestMatchers("/**").fullyAuthenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
@@ -53,5 +53,5 @@ public class SecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
 
         return jwtAuthenticationConverter;
-    }
+    }*/
 }

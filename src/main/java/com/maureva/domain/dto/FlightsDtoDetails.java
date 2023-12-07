@@ -3,7 +3,9 @@ package com.maureva.domain.dto;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import jakarta.validation.Valid;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,5 @@ public class FlightsDtoDetails {
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "flight")
-    private FlightDto[] flights;
+    private @Valid FlightDto[] flights;
 }
