@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class Flight implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 5623890623434L;
+    private static final long serialVersionUID = 6893890623434L;
 
     @Id
     @Column(name = "uuid", updatable = false, nullable = false)
@@ -42,10 +43,16 @@ public class Flight implements Serializable {
     @Column(name = "flight_number") // Customize length, name, etc., as needed
     private Integer flightNumber;
 
-    @Column(name = "flight_id", length = 50, unique = true)
+    @Column(name = "id", length = 50)
     private String id;
 
     @Column(name = "carrier")
     private String carrier;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DirectFlight> directFlight;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookingInfo> bookingInfo;
 
 }

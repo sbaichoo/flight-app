@@ -4,7 +4,6 @@ import com.maureva.domain.dto.validator.Capitalized;
 import jakarta.validation.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,9 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,8 +22,8 @@ import java.util.stream.Stream;
 public class AirportDto {
 
     /*
-    * TODO : Enhance with API to check if fields exist / is valid
-    * */
+     * TODO : Enhance with API to check if fields exist / is valid
+     * */
 
     @NotNull
     private Country country;
@@ -40,6 +37,8 @@ public class AirportDto {
 
     @NotNull
     private AirportCode airportCode;
+
+    private String name;
 
     public AirportDto validate() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

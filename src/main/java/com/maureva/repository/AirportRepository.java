@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface AirportRepository extends JpaRepository<Airport, UUID> {
-
     Optional<Airport> findAirportByAirportCode(AirportCode airportCode);
 
 }

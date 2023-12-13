@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.maureva.domain.dto.AirportCode;
 import com.maureva.domain.dto.AirportDto;
+import com.maureva.exception.ApplicationException;
 import com.maureva.mapper.AirportMapper;
 import com.maureva.repository.AirportRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -37,7 +38,6 @@ public class AirportService {
                 .map(airportMapper::map)
                 .orElseThrow(EntityNotFoundException::new);
     }
-
     public List<AirportDto> getAirportDtos() {
         return airportRepository.findAll()
                 .stream()
@@ -64,7 +64,7 @@ public class AirportService {
                     .forEach(airportRepository::save);
 
         } catch (RuntimeException | IOException e) {
-            throw new RuntimeException(e);
+            throw new ApplicationException(">>> AirportService.saveFlights : Failure Uploading Airport File");
         }
     }
 }

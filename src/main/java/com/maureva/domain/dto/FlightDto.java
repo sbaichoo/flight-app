@@ -10,7 +10,10 @@ import com.maureva.domain.dto.validator.ValidFlightDto;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -35,10 +38,14 @@ public class FlightDto {
     @Pattern(regexp = "[A-Z]{3}", message = "Origin must contain exactly three uppercase letters")
     private String origin;
 
+    private String originAirport;
+
     @JacksonXmlProperty(localName = "Destination")
     @NotBlank
     @Pattern(regexp = "[A-Z]{3}", message = "Destination must contain exactly three uppercase letters")
     private String destination;
+
+    private String destinationAirport;
 
     @JacksonXmlProperty(localName = "DepartureTime")
     @NotNull

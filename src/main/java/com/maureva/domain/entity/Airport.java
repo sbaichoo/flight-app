@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Airport {
 
     @Serial
-    private static final long serialVersionUID = 5623890623434L;
+    private static final long serialVersionUID = 50090623434L;
 
     @Id
     @Column(name = "uuid", updatable = false, nullable = false)

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.maureva.domain.dto.FlightDto;
 import com.maureva.domain.dto.FlightsDtoDetails;
 import com.maureva.mapper.FlightMapper;
+import com.maureva.repository.BookingInfoRepository;
 import com.maureva.repository.FlightRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +29,27 @@ public class FlightService {
 
     private final FlightRepository flightRepository;
 
+    private final BookingInfoRepository bookingInfoRepository;
+
     private final FlightMapper flightMapper;
 
     @Autowired
-    public FlightService(FlightRepository flightRepository, FlightMapper flightMapper) {
+    public FlightService(FlightRepository flightRepository, BookingInfoRepository bookingInfoRepository, FlightMapper flightMapper) {
         this.flightRepository = flightRepository;
+        this.bookingInfoRepository = bookingInfoRepository;
         this.flightMapper = flightMapper;
     }
 
     public void saveFlights(MultipartFile file) {
-        readFlights(file)
-                .stream()
-                .map(flightMapper::map)
-                .forEach(flightRepository::save);
+        flightRepository.saveAll(readFlights(file)
+                        .stream()
+                        .map(flightMapper::map)
+                        .collect(Collectors.toList()))
+                .forEach(flight -> flight.getBookingInfo().forEach(bookingInfo -> {
+                            bookingInfo.setFlight(flight);
+                            bookingInfoRepository.save(bookingInfo);
+                        }
+                ));
     }
 
     private List<@Valid FlightDto> readFlights(MultipartFile file) {

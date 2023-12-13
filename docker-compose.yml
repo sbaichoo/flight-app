@@ -23,10 +23,22 @@ services:
       DB_DATABASE: maureva
       DB_USER: admin
       DB_PASSWORD: password
+      KEYCLOAK_IMPORT: /maureva-flight-app/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
     image: jboss/keycloak:13.0.0
     ports:
       - "28080:8080"
     restart: unless-stopped
+    networks:
+      - local-keycloak
+
+  app:
+    depends_on:
+      - postgres
+    build: ./maureva-flight-app
+    container_name: maureva-flight-app
+    ports:
+      - "8000:8000"
+    restart: always
     networks:
       - local-keycloak
 

@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class ExceptionUtils {
 
     /*
-    * Creating my own to enable throwing
+    * Creating my own function interface to enable throwing
     * */
     @FunctionalInterface
     public interface CheckedFunction<T, R> {
